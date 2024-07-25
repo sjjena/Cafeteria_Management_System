@@ -9,19 +9,19 @@ float rating;
 float price;
 int food_Id_No;
 struct Item *next;
-struct item *prev;
+struct Item *prev;
 };
 
 int cust_id=1;
 struct Item* head;
 struct Item* last;
-int Today_custmer=0;
+int Today_customer=0;
 float total_income=0;
 
 struct order_hist
 {
-    int Customerr_Id;
-    int item[10][2];
+    int Customer_Id;
+    int Item[10][2];
     float amount;
     char date[11];
     struct order_hist *next;
@@ -50,16 +50,16 @@ void insert(char n[],float p,int fin)
 {
     struct Item* temp1=getnewNode(n,p,fin);
     if(head==NULL)
-    {   head1=temp1;
-        last1=temp1;
+    {   head=temp1;
+        last=temp1;
     }
 
     else
     {
 
-        temp1->prev=last1;
-        last1->next=temp1;
-        last1=temp1;
+        temp1->prev=last;
+        last->next=temp1;
+        last=temp1;
     }
 }
 
@@ -86,7 +86,7 @@ void Display()
     }
     while(temp!=NULL)
     {
-        printf("%d\t%s\t%f\t%f\n",temp->food_Id_No,temp->nametemp->price,temp->rating);
+        printf("%d\t%s\t%f\t%f\n",temp->food_Id_No,temp->name,temp->price,temp->rating);
         temp=temp->next;
     }
     
@@ -96,14 +96,14 @@ void Display()
 int login()
 {
     char username[20];
-    chhar userpwd[11];
+    char userpwd[11];
     int i;
 
     printf("Enter your User Name  :  ");
     scanf("%s",username);
     
     printf("Enter Your paasword   :  ");
-    for(i=;i<= 10;i++)
+    for(i=0;i<= 10;i++)
     {
         userpwd[i]=getch();
         printf("*");
@@ -111,7 +111,7 @@ int login()
 
 
 
-    if(!strcmp(username,"sjjena") && !strcmp(userpwd,"Jena@12345"))
+    if(!strcmp(username,"sjjena") && !strcmp(userpwd,"Jena12345"))
     {
         printf("\n\nLogged in Successful\n");
         return 1;
@@ -127,17 +127,18 @@ int login()
 void order()
 {
     int a[10][2];
-    intn,j=0,i=0;
+    int n,j=0,i=0;
 
     do{
         printf("Please Enter the ID NUMBER OF ITEM AND ITS QUENTITY");
-        for(i=0:i<2;i++)
+        for(i=0;i<2;i++)
         {
-            scanf("%d",%a[j][i]);
+            scanf("%d",&a[j][i]);
         }
         j++;
-        printf("Ypu want More item\n1.Yes\n2.No");
-    }while(n==1);
+        printf("you want More item\n1.Yes\n2.No");
+        scanf("%d",&n);
+    } while(n==1);
 
 
     float total_amount=0.0;
@@ -168,26 +169,26 @@ void order()
     }
 
     printf("---------------------------------------------------------------------\n");
-    printf("\nTotal Payble amount is : - \t\t%f\n",total-amount);
+    printf("\nTotal Payble amount is : - \t\t%f\n",total_amount);
     printf("---------------------------------------------------------------------\n");
  
     struct order_hist* temp2=getnewNode_hist();
     temp2->amount=total_amount;
-    temp->Customer_ID=cust_id++;
+    temp2->Customer_Id=cust_id++;
 
     int p,s;
 
     for(p=0;p<j;p++)
     {
-        for(s=0,s<2;s++)
+        for(s=0;s<2;s++)
         {
-            temp2->items[p][s]=a[p][s];
+            temp2->Item[p][s]=a[p][s];
         }
     }
 
     if(head1==NULL)
     {
-        hhead1=last1=temp2;
+        head1=last1=temp2;
     }
 
     else
@@ -197,7 +198,7 @@ void order()
         last1=temp2;
     }
 
-    strcpy(temp2->date,DAte);
+    strcpy(temp2->date,Date);
 
     Today_customer++;
     total_income+=total_income;
@@ -219,27 +220,27 @@ void display_rd_hist()
 
     while (temp!=NULL)
     {
-        printf("%d\t%s\t%f\t\n",temp->Customer_ID,temp->date,temp->Amount);
+        printf("%d\t%s\t%f\t\n",temp->Customer_Id,temp->date,temp->amount);
         temp=temp->next;
     }
 }
 
-main()
+ void main()
 {
     head=NULL;
     last=NULL;
 
-    insert("Burger    ",70,1);
-    insert("Pizza     ",235,6);
-    insert("Hot cake  ",750,10);
-    insert("Coffe     ",70,2);
-    insert("Ice-Cream ",70,3);
-    insert("Sandwich  ",60,7);
-    insert("Grill     ",52,7);
-    insert("Nun-bread",35,6);
+    insert("Burger     ",70,1);
+    insert("Pizza      ",235,6);
+    insert("Hot cake   ",750,10);
+    insert("Coffe      ",70,2);
+    insert("Ice-Cream  ",70,3);
+    insert("Sandwich   ",60,7);
+    insert("Grill      ",52,7);
+    insert("Nun-bread  ",35,6);
     insert("Cold Drinks",20,9);
 
-    int choice;
+    int choice,ex1;
 
     do{
         printf("\n--------------------------------------------------------------");
@@ -278,7 +279,9 @@ main()
             int e;
             if(k==1)
             {
-                do{
+                int ex2;
+                do
+                {
                     printf("------------------------------------------------------------------");
                     printf("1.        ADD NEW DISH\n");
                     printf("2.       TODAY'S TOTAL INCOME\n");
@@ -294,10 +297,10 @@ main()
                             printf("  ");
                             float p;
                             int fin;
-                            char n(50);
+                            char n[50];
 
                             printf("Enter the name of Item");
-                             scanf("%s",n);
+                             scanf("%s",&n);
 
                             printf("Enter the Price of Item");
                             scanf("%f",&p);
@@ -319,7 +322,7 @@ main()
                             break;
                         case 3:
                             printf("--------------------------------------------------------------------");
-                            printf("            TODAY TOTAL NO OF CUSTOMER VISITED ID:-  %d\n",Today_custmer);
+                            printf("            TODAY TOTAL NO OF CUSTOMER VISITED ID:-  %d\n",Today_customer);
                             printf("--------------------------------------------------------------------");
                             break;
                         case 4:
@@ -330,12 +333,16 @@ main()
                             printf("\n");
                             break;
                         case 5:
-                        printf("\n");
-                        Display();
-                        break;
+                            printf("\n");
+                            Display();
+                            break;
                     }
-                }
+                printf("you want More\n1.Yes\n2.No");
+                scanf("%d",&ex2);
+                }while(ex2==1);
             }
         }
-    }
+         printf("You want More\n1.Yes\n2.No");
+         scanf("%d",&ex1);
+    }while(ex1==1);
 }
